@@ -204,11 +204,11 @@ ros2 launch pro_arm_moveit move_arm.launch.py
 ```
 
 <p align="center">
-  <img src="https://github.com/Lynxmotion/PRO-ROS2-Arms/blob/main/images/move_arm_control.png" height="230px"/>
+  <img src="https://github.com/jeremynguyenn/Arm-Panda-robot-7dof/blob/main/7dof%20ARM%20Ros2/images/move_arm_control.png" height="230px"/>
 </p>
 
 
-* Note: This also launches the emergency_stop_marker node that integrates an interactive marker to STOP/START the arm_trajectory_controller. This functions as an Emergency Stop button but the same behavior can be achieved by running the folowing commands on a different terminal:
+* Note: This also launches the emergency_stop_marker node that integrates an interactive marker to STOP/START the arm_trajectory_controller. This functions as an Emergency Stop button but the same behavior can be achieved by running the following commands on a different terminal:
 
 ```
 ros2 run pro_arm_moveit trigger_emergency_stop.py start
@@ -229,10 +229,10 @@ ros2 launch pro_arm_moveit fake_arm_control.launch.py
   <table align="center" border="0">
     <tr>
       <td align="center">
-        <img src="https://github.com/Lynxmotion/PRO-ROS2-Arms/blob/main/images/fake_arm_control.jpg" height="230px"/>
+        <img src="https://github.com/jeremynguyenn/Arm-Panda-robot-7dof/blob/main/7dof%20ARM%20Ros2/images/fake_arm_control.jpg" height="230px"/>
       </td>
       <td align="center">
-        <img src="https://github.com/Lynxmotion/PRO-ROS2-Arms/blob/main/images/fake_arm_control.gif" height="230px"/>
+        <img src="https://github.com/jeremynguyenn/Arm-Panda-robot-7dof/blob/main/7dof%20ARM%20Ros2/images/fake_arm_control.gif" height="230px"/>
       </td>
     </tr>
   </table>
@@ -248,10 +248,10 @@ ros2 launch pro_arm_moveit sim_arm_control.launch.py
   <table align="center" border="0">
     <tr>
       <td align="center">
-        <img src="https://github.com/Lynxmotion/PRO-ROS2-Arms/blob/main/images/sim_arm_control.jpg" height="200px"/>
+        <img src="https://github.com/jeremynguyenn/Arm-Panda-robot-7dof/blob/main/7dof%20ARM%20Ros2/images/sim_arm_control.jpg" height="200px"/>
       </td>
       <td align="center">
-        <img src="https://github.com/Lynxmotion/PRO-ROS2-Arms/blob/main/images/sim_arm_control.gif" height="200px"/>
+        <img src="https://github.com/jeremynguyenn/Arm-Panda-robot-7dof/blob/main/7dof%20ARM%20Ros2/images/sim_arm_control.gif" height="200px"/>
       </td>
     </tr>
   </table>
@@ -282,15 +282,73 @@ sudo chmod 666 /dev/ttyACM0
   <table align="center" border="0">
     <tr>
       <td align="center">
-        <img src="https://github.com/Lynxmotion/PRO-ROS2-Arms/blob/main/images/pro_arm_ros2_control.gif" height="300px"/>
-        <br>Example 1: Real time
+        <img src="https://github.com/jeremynguyenn/Arm-Panda-robot-7dof/blob/main/7dof%20ARM%20Ros2/images/pro_arm_ros2_control.gif" height="300px"/>
+        <br>Example 1: Real-time
       </td>
       <td align="center">
-        <img src="https://github.com/Lynxmotion/PRO-ROS2-Arms/blob/main/images/pro_arm_moveit_control.gif" height="300px"/>
+        <img src="https://github.com/jeremynguyenn/Arm-Panda-robot-7dof/blob/main/7dof%20ARM%20Ros2/images/pro_arm_moveit_control.gif" height="300px"/>
         <br>Example 2: Speeded up 2x
       </td>
     </tr>
   </table>
 </p>
 
-* Note: The planner uses a velocity and acceleration scaling factor of 0.5, these can be adjusted through RViz. The custom hardware interface also supports setting maximum speed and acceleration values which are configured at the initial stage and can be adjusted in the *pro_arm.ros2_control* file.
+* Note: The planner uses a velocity and acceleration scaling factor of 0.5; these can be adjusted through RViz. The custom hardware interface also supports setting maximum speed and acceleration values which are configured at the initial stage and can be adjusted in the *pro_arm.ros2_control* file.
+
+### PRO Simulation Examples
+**C++**
+**Follow Goal Demo (Simulation)**
+
+The pro_sim_examples package includes the follow_target demo, which simulates the LSS arm in Gazebo Ignition and allows the user to interact with a box in the virtual environment. This example consists of a C++ implementation that causes the arm to track the target (box) whenever its location is changed.
+
+```
+ros2 launch pro_sim_examples ex_cpp_follow_target.launch.py
+```
+
+Note: The 5DoF version does not have enough degrees of freedom to achieve all desired end-effector poses (position + orientation). This implementation first attempts to move to the desired pose, if unsuccessful, it sets a position-only target, which allows it to plan a trajectory "ignoring" the orientation.
+
+<p align="center">
+  <table align="center" border="0">
+    <tr>
+      <td align="center">
+        <img src="https://github.com/jeremynguyenn/Arm-Panda-robot-7dof/blob/main/7dof%20ARM%20Ros2/images/follow_target_550_pge.jpg" height="260px"/>
+      </td>
+      <td align="center">
+        <img src="https://github.com/jeremynguyenn/Arm-Panda-robot-7dof/blob/main/7dof%20ARM%20Ros2/images/follow_target_900_cge.gif" height="260px"/>
+      </td>
+    </tr>
+  </table>
+</p>
+
+**Move Object Example (Simulation)**
+
+The move_object example contains a C++ implementation to make the arm move a box from one table to another. The motions are simulated in Gazebo Ignition.
+
+```
+ros2 launch pro_sim_examples ex_cpp_move_object.launch.py
+```
+
+<p align="center">
+  <table align="center" border="0">
+    <tr>
+      <td align="center">
+        <img src="https://github.com/jeremynguyenn/Arm-Panda-robot-7dof/blob/main/7dof%20ARM%20Ros2/images/move_object_550.jpg" height="230px"/>
+      </td>
+      <td align="center">
+        <img src="https://github.com/jeremynguyenn/Arm-Panda-robot-7dof/blob/main/7dof%20ARM%20Ros2/images/move_object_900.gif" height="230px"/>
+      </td>
+    </tr>
+  </table>
+</p>
+
+## Resources
+
+Read more about the PRO Robotic Arm in the [Wiki](https://wiki.lynxmotion.com/info/wiki/lynxmotion/view/ses-pro-arms/).
+
+Purchase the PRO arm on [RobotShop](https://www.robotshop.com/collections/lynxmotion-ses-pro-robotic-arms).
+
+Official Lynxmotion Smart Servo PRO (LSS-P) Hardware Interface available [here](https://github.com/Lynxmotion/LSS-P-ROS2-Hardware). 
+
+If you want more details about the LSS-P communication protocol, visit this [website](https://wiki.lynxmotion.com/info/wiki/lynxmotion/view/lynxmotion-smart-servo-pro/lss-p-communication-protocol/).
+
+Have any questions? Ask them on the RobotShop [Community](https://community.robotshop.com/forum/c/lynxmotion/electronics-software/27).
